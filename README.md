@@ -1,4 +1,7 @@
-## Project Setup
+## A small project that implements the functionality of viewing and searching GIF files.
+
+
+### Project Setup
 
 ```sh
 npm install
