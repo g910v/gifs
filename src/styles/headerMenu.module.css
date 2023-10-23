@@ -1,0 +1,19 @@
+@media screen and (max-width: 960px) {
+  .headerMenu:global(.p-menubar .p-menubar-root-list) {
+    background: transparent !important;
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+}
+
+.headerMenu:global(.p-menubar .p-submenu-list) {
+  background: transparent !important;
+  backdrop-filter: blur(60px);
+  -webkit-backdrop-filter: blur(60px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.headerMenu:global(.p-menubar .p-submenu-list) {
+  right: 0;
+}

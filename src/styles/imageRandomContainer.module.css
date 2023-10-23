@@ -1,0 +1,38 @@
+.imageContainer {
+  height: 50%;
+  width: 90%;
+  margin: 0rem;
+}
+@media screen and (min-width: 768px) {
+  .imageContainer {
+    height: 70%;
+    width: 80%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .imageContainer {
+    height: 70%;
+    width: 65%;
+  }
+}
+
+.switchButtons {
+  height: 50%;
+  width: 3.5rem;
+}
+@media screen and (min-width: 768px) {
+  .switchButtons {
+    height: 70%;
+    width: 4rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .switchButtons {
+    height: 70%;
+    width: 5rem;
+  }
+}
+
+.switchButtons:global(.p-button:focus) {
+  box-shadow: none;
+}

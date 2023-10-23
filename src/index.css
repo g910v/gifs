@@ -1,0 +1,30 @@
+@import "primereact/resources/themes/arya-orange/theme.css"; 
+
+:root {
+  --main-background: linear-gradient(to bottom right, #3F51B5, #957103);
+  --text-color: #fff6dd;
+}
+
+:root {
+  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  color: var(--text-color);
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--main-background);
+}
+
+
