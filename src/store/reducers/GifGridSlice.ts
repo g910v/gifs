@@ -41,7 +41,6 @@ const gifGridSlice = createSlice({
       state.gifList = [];
       state.offset = 0;
       state.error = '';
-      console.log(state.error);
     },
   },
   extraReducers: builder => {
