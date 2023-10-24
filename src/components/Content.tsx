@@ -16,7 +16,7 @@ const Content: React.FC = () => (
     )}
     >
       <Routes>
-        <Route path="/" element={<Navigate to={routes.TRENDS.path} />} />
+        {/* <Route path="/" element={<Navigate to={routes.TRENDS.path} />} /> */}
         <Route path={routes.SEARCH.path} element={<SearchPage />} />
         <Route path={routes.TRENDS.path} element={<TrendsPage />} />
         <Route path={routes.RANDOM.path} element={<RandomPage />} />

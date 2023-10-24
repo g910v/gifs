@@ -1,7 +1,7 @@
 export default Object.freeze({
   SEARCH: {
     name: 'Search',
-    path: '/search',
+    path: '/',
   },
   TRENDS: {
     name: 'Trends',
