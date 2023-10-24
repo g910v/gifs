@@ -48,7 +48,7 @@ module.exports = {
     "no-unused-vars": "off",
     "import/no-unresolved": [2, { ignore: ['\.svg'] }],
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "error",
       {
         "vars": "all",
         "args": "after-used",

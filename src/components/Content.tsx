@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import routes from '../shared/routes';
 
