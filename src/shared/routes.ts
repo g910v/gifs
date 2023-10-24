@@ -1,11 +1,11 @@
 export default Object.freeze({
   SEARCH: {
     name: 'Search',
-    path: '/',
+    path: '/search',
   },
   TRENDS: {
     name: 'Trends',
-    path: '/trends',
+    path: '/gifs',
   },
   RANDOM: {
     name: 'Random',
