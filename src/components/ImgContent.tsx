@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Skeleton } from 'primereact/skeleton';
 import { Image } from 'primereact/image';
 import classNames from 'classnames';
+import { TbFaceIdError } from 'react-icons/tb';
 import { IGifItem } from '../store/models/IGif';
 import styles from '../styles/imageGrid.module.css';
 
@@ -23,7 +24,12 @@ const ImgContent: React.FC<Props> = props => {
       }
       {
         isError && (
-          <div className="w-full h-full">error</div>
+          <div
+            className="w-full h-full flex justify-content-center align-items-center"
+            style={{ background: 'rgba(255, 255, 255, 0.05)' }}
+          >
+            <TbFaceIdError style={{ fontSize: '35px' }} />
+          </div>
         )
       }
       <Image
