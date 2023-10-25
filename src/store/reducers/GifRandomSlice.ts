@@ -23,6 +23,9 @@ const gifRandomSlice = createSlice({
       state.gifList = [];
       state.error = '';
     },
+    resetError(state) {
+      state.error = '';
+    },
   },
   extraReducers: builder => {
     builder
@@ -40,6 +43,6 @@ const gifRandomSlice = createSlice({
   },
 });
 
-export const { actions: { switchPageReset } } = gifRandomSlice;
+export const { actions: { switchPageReset, resetError } } = gifRandomSlice;
 
 export default gifRandomSlice.reducer;

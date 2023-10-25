@@ -33,7 +33,7 @@ const fetchGifs = createAsyncThunk<
           altText: g.images.title,
           name: g.images.title,
         }));
-        const totalCount = data.pagination.total_count;
+        const totalCount = data.pagination?.total_count ?? 0;
         return { fixedData, totalCount };
       } catch (error) {
         return thunkApi.rejectWithValue(error);

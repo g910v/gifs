@@ -7,14 +7,13 @@ import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks';
 import fetchGifRandom from '../store/asyncActions/FetchGifRandom';
 import ImgContent from '../components/ImgContent';
 import styles from '../styles/imageRandomContainer.module.css';
-import { switchPageReset } from '../store/reducers/GifRandomSlice';
+import { resetError, switchPageReset } from '../store/reducers/GifRandomSlice';
 
 const RandomPage: React.FC = () => {
   const [gifIndex, setGifIndex] = useState(0);
   const dispatch = useAppDispatch();
-  const { gifList, loading } = useAppSelector(state => state.gifRandomReducer);
+  const { gifList, loading, error } = useAppSelector(state => state.gifRandomReducer);
   const errorMessage = useRef<Toast>(null);
-  const { error } = useAppSelector(state => state.gifRandomReducer);
 
   useEffect(() => {
     dispatch(fetchGifRandom());
@@ -25,6 +24,11 @@ const RandomPage: React.FC = () => {
       dispatch(fetchGifRandom());
     }
     setGifIndex(prev => prev += 1);
+  };
+
+  const onRefresh = () => {
+    dispatch(resetError());
+    dispatch(fetchGifRandom());
   };
 
   useEffect(() => {
@@ -58,9 +62,17 @@ const RandomPage: React.FC = () => {
       />
       <div className={classNames(styles.imageContainer)}>
         {
-          loading || !gifList.length
-            ? <Skeleton className="w-full h-full" />
-            : <ImgContent gif={gifList[gifIndex]} />
+          loading && <Skeleton className="w-full h-full" />
+        }
+        {
+          !!gifList.length && !loading && <ImgContent gif={gifList[gifIndex]} />
+        }
+        {
+          error && (
+          <div style={{ background: 'rgba(255, 255, 255, 0.05)' }} className="w-full h-full flex justify-content-center align-items-center">
+            <Button text icon="pi pi-refresh" onClick={onRefresh} />
+          </div>
+          )
         }
       </div>
       <Button

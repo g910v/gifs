@@ -29,6 +29,9 @@ const gifGridSlice = createSlice({
       state.gifList = null;
       state.offset = 0;
     },
+    resetError(state) {
+      state.error = '';
+    },
     addOffset(state) {
       state.offset += 9;
     },
@@ -65,7 +68,7 @@ const gifGridSlice = createSlice({
 
 export const {
   actions: {
-    resetSearch, addOffset, setTrueFetching, switchPageReset,
+    resetSearch, addOffset, setTrueFetching, switchPageReset, resetError,
   },
 } = gifGridSlice;
 
