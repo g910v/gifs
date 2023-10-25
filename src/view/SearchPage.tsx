@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
 import { useSearchParams } from 'react-router-dom';
-import { Toast } from 'primereact/toast';
 import { Button } from 'primereact/button';
 import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks';
 import fetchGifs from '../store/asyncActions/FetchGifGrid';
@@ -18,7 +17,6 @@ const SearchPage: React.FC = () => {
     gifList, loading, totalRecord, fetching, error,
   } = useAppSelector(state => state.gifGridReducer);
   const [searchParams, setSearchParams] = useSearchParams();
-  const errorMessages = useRef<Toast>(null);
 
   const { t } = useTranslation();
 
@@ -74,20 +72,8 @@ const SearchPage: React.FC = () => {
     [],
   );
 
-  useEffect(() => {
-    if (error) {
-      errorMessages.current?.show({
-        severity: 'warn',
-        summary: 'Не удалось выполнить запрос',
-        detail: error,
-        life: 4500,
-      });
-    }
-  }, [error]);
-
   return (
     <div className="w-full flex flex-column align-items-center justify-content-center p-3 lg:pt-8 pt-5">
-      <Toast ref={errorMessages} position="bottom-left" />
       <span className="p-input-icon-left p-input-icon-right lg:mb-6 mb-3 lg:w-9 w-11">
         <i className="pi pi-search w-max" />
         <InputText

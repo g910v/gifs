@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from 'primereact/button';
 import { Skeleton } from 'primereact/skeleton';
 import classNames from 'classnames';
-import { Toast } from 'primereact/toast';
 import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks';
 import fetchGifRandom from '../store/asyncActions/FetchGifRandom';
 import ImgContent from '../components/ImgContent';
@@ -13,7 +12,6 @@ const RandomPage: React.FC = () => {
   const [gifIndex, setGifIndex] = useState(0);
   const dispatch = useAppDispatch();
   const { gifList, loading, error } = useAppSelector(state => state.gifRandomReducer);
-  const errorMessage = useRef<Toast>(null);
 
   useEffect(() => {
     dispatch(fetchGifRandom());
@@ -31,17 +29,6 @@ const RandomPage: React.FC = () => {
     dispatch(fetchGifRandom());
   };
 
-  useEffect(() => {
-    if (error) {
-      errorMessage.current?.show({
-        severity: 'warn',
-        summary: 'Не удалось выполнить запрос',
-        detail: error,
-        life: 4500,
-      });
-    }
-  }, [error]);
-
   useEffect(
     () => () => {
       dispatch(switchPageReset());
@@ -52,7 +39,6 @@ const RandomPage: React.FC = () => {
 
   return (
     <div style={{ height: '80vh' }} className="w-full flex align-items-center justify-content-center sm:p-3">
-      <Toast ref={errorMessage} position="bottom-left" />
       <Button
         disabled={!gifIndex}
         onClick={() => setGifIndex(prev => prev -= 1)}
