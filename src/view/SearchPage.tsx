@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/ReduxHooks';
 import fetchGifs from '../store/asyncActions/FetchGifGrid';
 import GifsGrid from '../components/GifsGrid';
@@ -12,6 +13,7 @@ const SearchPage: React.FC = () => {
   const {
     gifList, loading, totalRecord, fetching,
   } = useAppSelector(state => state.gifGridReducer);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { t } = useTranslation();
 
@@ -20,6 +22,10 @@ const SearchPage: React.FC = () => {
   const onClearSearch = () => {
     setInputValue('');
     dispatch(resetSearch());
+    setSearchParams(param => {
+      param.delete('text');
+      return param;
+    });
   };
 
   useEffect(() => {
@@ -27,10 +33,14 @@ const SearchPage: React.FC = () => {
       if (inputValue.length > 1) {
         dispatch(resetSearch());
         dispatch(fetchGifs(inputValue));
+        setSearchParams(param => {
+          param.set('text', inputValue);
+          return param;
+        });
       }
     }, 1000);
     return () => clearTimeout(timer);
-  }, [inputValue, dispatch]);
+  }, [inputValue, dispatch, setSearchParams]);
 
   useEffect(() => {
     if (fetching && gifList.length !== totalRecord) {
@@ -41,8 +51,13 @@ const SearchPage: React.FC = () => {
   }, [fetching, dispatch]);
 
   useEffect(
-    () => () => {
-      dispatch(switchPageReset());
+    () => {
+      if (searchParams.get('text')) {
+        setInputValue(searchParams.get('text') ?? '');
+      }
+      return () => {
+        dispatch(switchPageReset());
+      };
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
