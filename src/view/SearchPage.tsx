@@ -40,7 +40,8 @@ const SearchPage: React.FC = () => {
       }
     }, 1000);
     return () => clearTimeout(timer);
-  }, [inputValue, dispatch, setSearchParams]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputValue, dispatch]);
 
   useEffect(() => {
     if (fetching && gifList.length !== totalRecord) {
