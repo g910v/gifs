@@ -16,7 +16,7 @@ const TrendsPage: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (fetching && gifList.length !== totalRecord) {
+    if (fetching && gifList?.length !== totalRecord) {
       dispatch(addOffset());
       dispatch(fetchGifs());
     }
@@ -33,7 +33,9 @@ const TrendsPage: React.FC = () => {
 
   return (
     <div className="w-full flex flex-column align-items-center justify-content-center p-3 lg:pt-6 pt-5">
-      <GifsGrid gifList={gifList} />
+      {
+        !!gifList && <GifsGrid gifList={gifList} />
+      }
       {
         (!!offset && loading) && (<ProgressSpinner className="w-5rem mt-5" strokeWidth="3" />)
       }

@@ -44,7 +44,7 @@ const SearchPage: React.FC = () => {
   }, [inputValue, dispatch]);
 
   useEffect(() => {
-    if (fetching && gifList.length !== totalRecord) {
+    if (fetching && gifList?.length !== totalRecord) {
       dispatch(addOffset());
       dispatch(fetchGifs(inputValue));
     }
@@ -82,9 +82,14 @@ const SearchPage: React.FC = () => {
           !loading && !!inputValue.length && (<i className="pi pi-times mr-1 cursor-pointer" onClick={onClearSearch} />)
         }
       </span>
-      <GifsGrid gifList={gifList} />
       {
-        (!!gifList.length && loading) && (<ProgressSpinner className="w-5rem mt-5" strokeWidth="3" />)
+        (!loading && gifList?.length === 0) && (<div>{t('emptyMessage')}</div>)
+      }
+      {
+        gifList && <GifsGrid gifList={gifList} />
+      }
+      {
+        (!!gifList?.length && loading) && (<ProgressSpinner className="w-5rem mt-5" strokeWidth="3" />)
       }
     </div>
   );

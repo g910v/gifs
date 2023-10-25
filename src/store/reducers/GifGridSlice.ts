@@ -5,7 +5,7 @@ import fetchGifs, { FetchGifGridFulfilled } from '../asyncActions/FetchGifGrid';
 
 interface IGifGridState {
   loading: boolean,
-  gifList: IGifItem[],
+  gifList: IGifItem[] | null,
   error: string,
   offset: number,
   totalRecord: number,
@@ -13,7 +13,7 @@ interface IGifGridState {
 }
 
 const initialState: IGifGridState = {
-  gifList: [],
+  gifList: null,
   loading: false,
   error: '',
   offset: 0,
@@ -26,7 +26,7 @@ const gifGridSlice = createSlice({
   initialState,
   reducers: {
     resetSearch(state) {
-      state.gifList = [];
+      state.gifList = null;
       state.offset = 0;
     },
     addOffset(state) {
@@ -38,7 +38,7 @@ const gifGridSlice = createSlice({
     switchPageReset(state) {
       state.fetching = false;
       state.totalRecord = 0;
-      state.gifList = [];
+      state.gifList = null;
       state.offset = 0;
       state.error = '';
     },
@@ -52,7 +52,9 @@ const gifGridSlice = createSlice({
         state.loading = false;
         state.totalRecord = action.payload.totalCount;
         state.fetching = false;
-        state.gifList.push(...action.payload.fixedData);
+        state.gifList
+          ? state.gifList.push(...action.payload.fixedData)
+          : state.gifList = action.payload.fixedData;
       })
       .addCase(fetchGifs.rejected.type, (state, action: PayloadAction<AxiosError>) => {
         state.loading = false;

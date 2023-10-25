@@ -1,5 +1,6 @@
 {
   "search": "Search",
   "trends": "Trends",
-  "random": "Random"
+  "random": "Random",
+  "emptyMessage": "Nothing found for your request"
 }
