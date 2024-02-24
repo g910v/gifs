@@ -12,7 +12,7 @@ interface IGifGridState {
   fetching: boolean,
 }
 
-const initialState: IGifGridState = {
+export const initialState: IGifGridState = {
   gifList: null,
   loading: false,
   error: '',

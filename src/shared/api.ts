@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseApiUrl = `${import.meta.env.VITE_API_URL}/gifs`;
+const baseApiUrl = `${process.env.VITE_API_URL}/gifs`;
 
 export const apiUrls = Object.freeze({
   trendingApiUrl: `${baseApiUrl}/trending`,

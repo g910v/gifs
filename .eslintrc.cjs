@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, jest: true },
   extends: [
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
@@ -33,6 +33,7 @@ module.exports = {
     ],
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off",
     "react/destructuring-assignment": "off", 
     "react/prop-types": "off",
     "react/require-default-props": "off",
