@@ -2,8 +2,9 @@ import setupStore from '../store/Store';
 import {
   resetError, switchPageReset,
 } from '../store/reducers/GifRandomSlice';
-
-jest.mock('axios');
+import { formattedData, responseData } from '../testMockValues/randomGifs';
+import fetchGifs from '../store/asyncActions/FetchGifRandom';
+import api from '../shared/api';
 
 describe('git random slice', () => {
   const store = setupStore();
@@ -19,5 +20,19 @@ describe('git random slice', () => {
     const { gifRandomReducer: { error, gifList } } = store.getState();
     expect(error).toBe('');
     expect(gifList).toEqual([]);
+  });
+
+  test('fetch random gif', async () => {
+    const responce = {
+      data: {
+        data: responseData,
+      },
+    };
+    const getRandomGif = jest.spyOn(api, 'get').mockResolvedValueOnce(responce);
+    await store.dispatch(fetchGifs());
+    const { gifRandomReducer: { gifList } } = store.getState();
+
+    expect(getRandomGif).toHaveBeenCalled();
+    expect(gifList[0]).toEqual(formattedData);
   });
 });

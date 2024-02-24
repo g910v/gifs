@@ -18,8 +18,8 @@ const fetchGifRandom = createAsyncThunk<
           id: gif.id,
           baseImgUrl: gif.images.downsized_large.url,
           extraImgUrl: gif.images.downsized_large.url,
-          altText: gif.images.title,
-          name: gif.images.title,
+          altText: gif.title,
+          name: gif.title,
         };
         return fixedData;
       } catch (error) {
