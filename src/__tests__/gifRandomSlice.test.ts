@@ -3,10 +3,10 @@ import {
   resetError, switchPageReset,
 } from '../store/reducers/GifRandomSlice';
 import { formattedData, responseData } from '../testMockValues/randomGifs';
-import fetchGifs from '../store/asyncActions/FetchGifRandom';
 import api from '../shared/api';
+import fetchGifRandom from '../store/asyncActions/FetchGifRandom';
 
-describe('git random slice', () => {
+describe('gif random slice', () => {
   const store = setupStore();
 
   test('reset error', () => {
@@ -29,7 +29,7 @@ describe('git random slice', () => {
       },
     };
     const getRandomGif = jest.spyOn(api, 'get').mockResolvedValueOnce(responce);
-    await store.dispatch(fetchGifs());
+    await store.dispatch(fetchGifRandom());
     const { gifRandomReducer: { gifList } } = store.getState();
 
     expect(getRandomGif).toHaveBeenCalled();

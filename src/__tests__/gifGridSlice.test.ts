@@ -1,28 +1,70 @@
-import gifGridSlice, {
-  addOffset, initialState, resetError, resetSearch, setTrueFetching, switchPageReset,
+import api from '../shared/api';
+import setupStore from '../store/Store';
+import fetchGifs from '../store/asyncActions/FetchGifGrid';
+import {
+  addOffset, resetError, resetSearch, setTrueFetching, switchPageReset,
 } from '../store/reducers/GifGridSlice';
+import { formattedData, responseData } from '../testMockValues/gridGifs';
 
-describe('getCounterValue', () => {
+describe('gif grid slice', () => {
+  const store = setupStore();
+
   test('true fetching', () => {
-    expect(gifGridSlice(initialState, setTrueFetching())).toEqual({ ...initialState, fetching: true });
+    store.dispatch(setTrueFetching());
+    const { gifGridReducer: { fetching } } = store.getState();
+    expect(fetching).toBeTruthy();
   });
-  test('resert error', () => {
-    expect(gifGridSlice(initialState, resetError())).toEqual({ ...initialState, error: '' });
-  });
+
   test('reset search', () => {
-    expect(gifGridSlice(initialState, resetSearch())).toEqual({ ...initialState, gifList: null, offset: 0 });
+    store.dispatch(resetSearch());
+    const { gifGridReducer: { gifList, offset } } = store.getState();
+    expect(offset).toBe(0);
+    expect(gifList).toBeNull();
   });
-  test('switch page reset', () => {
-    expect(gifGridSlice(initialState, switchPageReset())).toEqual({
-      ...initialState,
-      gifList: null,
-      error: '',
-      offset: 0,
-      totalRecord: 0,
-      fetching: false,
-    });
+
+  test('reset error', () => {
+    store.dispatch(resetError());
+    const { gifGridReducer: { error } } = store.getState();
+    expect(error).toBe('');
   });
+
   test('add offset', () => {
-    expect(gifGridSlice(initialState, addOffset())).toEqual({ ...initialState, offset: 9 });
+    store.dispatch(addOffset());
+    const { gifGridReducer: { offset } } = store.getState();
+    expect(offset).toBe(9);
+  });
+
+  test('switch page reset', () => {
+    store.dispatch(switchPageReset());
+    const {
+      gifGridReducer: {
+        error, gifList, offset, totalRecord, fetching,
+      },
+    } = store.getState();
+    expect(error).toBe('');
+    expect(gifList).toBeNull();
+    expect(offset).toBe(0);
+    expect(fetching).toBeFalsy();
+    expect(totalRecord).toBe(0);
+  });
+
+  test('fetch grid gifs', async () => {
+    const responce = {
+      data: {
+        data: responseData,
+        pagination: {
+          offset: 0,
+          count: 3,
+          total_count: 3,
+        },
+      },
+    };
+    const getRandomGif = jest.spyOn(api, 'get').mockResolvedValueOnce(responce);
+    await store.dispatch(fetchGifs());
+    const { gifGridReducer: { gifList, totalRecord } } = store.getState();
+
+    expect(getRandomGif).toHaveBeenCalled();
+    expect(gifList).toEqual(formattedData);
+    expect(totalRecord).toBe(3);
   });
 });

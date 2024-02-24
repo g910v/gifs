@@ -30,8 +30,8 @@ const fetchGifs = createAsyncThunk<
           id: g.id,
           baseImgUrl: g.images.downsized_medium.url,
           extraImgUrl: g.images.downsized_large.url,
-          altText: g.images.title,
-          name: g.images.title,
+          altText: g.title,
+          name: g.title,
         }));
         const totalCount = data.pagination?.total_count ?? 0;
         return { fixedData, totalCount };
