@@ -1,10 +1,10 @@
-import api from '../shared/api';
-import setupStore from '../store/Store';
-import fetchGifs from '../store/asyncActions/FetchGifGrid';
+import api from '../src/shared/api';
+import { setupStore } from '../src/store/Store';
+import fetchGifs from '../src/store/asyncActions/FetchGifGrid';
 import {
   addOffset, resetError, resetSearch, setTrueFetching, switchPageReset,
-} from '../store/reducers/GifGridSlice';
-import { formattedData, responseData } from '../testMockValues/gridGifs';
+} from '../src/store/reducers/GifGridSlice';
+import { formattedData, responseData } from './testMockValues/gridGifs';
 
 describe('gif grid slice', () => {
   const store = setupStore();

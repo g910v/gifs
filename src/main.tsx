@@ -4,11 +4,9 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import setupStore from './store/Store';
 
 import './locale/i18n';
-
-const store = setupStore();
+import store from './store/Store';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

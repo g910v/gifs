@@ -1,10 +1,10 @@
-import setupStore from '../store/Store';
+import { setupStore } from '../src/store/Store';
 import {
   resetError, switchPageReset,
-} from '../store/reducers/GifRandomSlice';
-import { formattedData, responseData } from '../testMockValues/randomGifs';
-import api from '../shared/api';
-import fetchGifRandom from '../store/asyncActions/FetchGifRandom';
+} from '../src/store/reducers/GifRandomSlice';
+import { formattedData, responseData } from './testMockValues/randomGifs';
+import api from '../src/shared/api';
+import fetchGifRandom from '../src/store/asyncActions/FetchGifRandom';
 
 describe('gif random slice', () => {
   const store = setupStore();

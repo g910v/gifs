@@ -6,7 +6,8 @@ export default {
     '^.+\\.tsx?$': 'ts-jest',
   },
   moduleNameMapper: {
-    '\\.(css)$': 'identity-obj-proxy',
+    '\\.(css|sass|less)$': 'identity-obj-proxy',
     '\\.svg': '<rootDir>/__mocks__/svg-transform.ts',
   },
+  testPathIgnorePatterns: ['<rootDir>/__tests__/test-utils.tsx', '<rootDir>/__tests__/testMockValues'],
 };
