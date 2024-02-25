@@ -9,5 +9,5 @@ export default {
     '\\.(css|sass|less)$': 'identity-obj-proxy',
     '\\.svg': '<rootDir>/__mocks__/svg-transform.ts',
   },
-  testPathIgnorePatterns: ['<rootDir>/__tests__/test-utils.tsx', '<rootDir>/__tests__/testMockValues'],
+  testPathIgnorePatterns: ['<rootDir>/__tests__/test-utils.tsx', '<rootDir>/__tests__/testMockValues', '<rootDir>/node_modules/'],
 };
